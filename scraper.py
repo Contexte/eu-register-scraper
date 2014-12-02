@@ -112,17 +112,20 @@ def get_entry(url):
             print "ALIASES", section
         for tr in box.findall('./table/tbody/tr'):
             tds = tr.findall('td')
-            if len(tds) < 2:
+            try:
+                if len(tds) < 2:
+                    continue
+                label = tds[0].text.strip()
+                if tds[1].find('ul') is not None:
+                    value = [l.xpath('string()').strip() for l in tds[1].findall('.//li')]
+                    value = ";".join(value)
+                else:
+                    value = tds[1].xpath('string()').strip()
+                for k, v in aliases.items():
+                    if k in label:
+                        entry[v] = value
+            except:
                 continue
-            label = tds[0].text.strip()
-            if tds[1].find('ul') is not None:
-                value = [l.xpath('string()').strip() for l in tds[1].findall('.//li')]
-                value = ";".join(value)
-            else:
-                value = tds[1].xpath('string()').strip()
-            for k, v in aliases.items():
-                if k in label:
-                    entry[v] = value
     pprint(entry)
     scraperwiki.sqlite.save(unique_keys=["id"], data=entry)
 
