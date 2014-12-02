@@ -7,7 +7,7 @@ from cookielib import CookieJar
 from pprint import pprint
 from datetime import datetime
 
-#import scraperwiki
+import scraperwiki
 
 URL_SEARCH = 'http://ec.europa.eu/transparencyregister/public/consultation/search.do'
 URL = 'http://ec.europa.eu/transparencyregister/public/consultation/search.do?country=%s&d-4959990-p=%s'
