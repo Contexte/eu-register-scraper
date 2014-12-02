@@ -7,7 +7,7 @@ from cookielib import CookieJar
 from pprint import pprint
 from datetime import datetime
 
-import scraperwiki
+#import scraperwiki
 
 URL_SEARCH = 'http://ec.europa.eu/transparencyregister/public/consultation/search.do'
 URL = 'http://ec.europa.eu/transparencyregister/public/consultation/search.do?country=%s&d-4959990-p=%s'
@@ -94,11 +94,11 @@ def get_country_index():
                 break
 
 def get_entry(url):
-    doc = html.parse(url)
+    doc = html.parse(urlopen(url))
     entry = {}
     profile = doc.find('//div[@class="box"]')
     entry['name'] = profile.findtext('.//h4/b').strip()
-    id, _, registration_date, _, update_date = list(profile.findall('.//span'))
+    id, _, registration_date, _, update_date, _, year = list(profile.findall('.//span'))
     entry['id'] = id.text.strip()
     entry['register_url'] = url
     entry['retrieved_at'] = datetime.now().isoformat()
