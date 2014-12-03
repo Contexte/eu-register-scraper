@@ -89,7 +89,10 @@ def get_country_index():
             doc = html.parse(urlopen(req))
             anchors = list(doc.findall('//table[@id="searchResultsTable"]/tbody//a'))
             for a in anchors:
-                get_entry(urljoin(URL, a.get('href')))
+                try:
+                    get_entry(urljoin(URL, a.get('href')))
+                except:
+                    continue
             if doc.find('//span[@class="pagelinks"]/a/img[@alt="Next"]') is None:
                 break
 
