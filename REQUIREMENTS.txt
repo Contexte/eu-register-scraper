@@ -1,0 +1,9 @@
+Mako==1.0.1
+MarkupSafe==0.23
+SQLAlchemy==1.0.3
+alembic==0.7.5.post2
+argparse==1.2.1
+lxml==3.4.4
+requests==2.7.0
+scraperwiki==0.4.1
+wsgiref==0.1.2
